@@ -18,7 +18,7 @@ export const createCategory = async (category: Category) => {
 
 export const updateCategory = async (category: Category) => {
     return execute<OkPacket>(categoryQueries.updateCategory,
-        [category.category, category.description]);
+        [category.category, category.description, category.categoryID]);
 };
 
 export const deleteCategory = async (categoryID: number) => {

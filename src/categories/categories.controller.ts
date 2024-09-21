@@ -1,4 +1,4 @@
-import e, { Request, RequestHandler, Response } from 'express';
+import { Request, RequestHandler, Response } from 'express';
 import * as CategoryDao from './categories.dao';
 import { OkPacket } from 'mysql';
 

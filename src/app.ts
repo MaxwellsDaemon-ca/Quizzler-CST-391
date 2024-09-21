@@ -4,6 +4,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import logger from './middleware/logger.middleware';
 import categoriesRouter from './categories/categories.routes';
+import usersRouter from './users/users.routes';
 
 dotenv.config();
 
@@ -20,7 +21,7 @@ if (process.env.NODE_ENV == 'development') {
     console.log(process.env.GREETING + ' in dev mode');
 }
 
-app.use('/', [categoriesRouter]);
+app.use('/', [categoriesRouter, usersRouter]);
 
 app.listen(port, () => {
     console.log(`Quizzler App listening at http://localhost:${port}`);

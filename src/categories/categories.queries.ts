@@ -11,7 +11,7 @@ export const categoryQueries = {
         WHERE quizzler.categories.categoryID = ?
     `,
     createCategory: `
-        INSERT INTO categories(categoryName, description) VALUE(?,?)
+        INSERT INTO categories(categoryName, description) VALUES(?,?)
     `,
     updateCategory: `
         UPDATE quizzler.categories

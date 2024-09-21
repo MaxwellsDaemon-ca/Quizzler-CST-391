@@ -1,7 +1,7 @@
-export interface Users {
+export interface User {
     userID: number;
     username: string;
     email: string;
-    passwordHash: string;
+    password: string;
     totalScore: number;
 }

@@ -13,7 +13,7 @@
 ## Technologies Used
 - **Backend**: Node.js, Express.js, TypeScript
 - **Database**: MySQL
-- **Frontend**: Angular (if applicable)
+- **Frontend**: Angular (eventually)
 - **Authentication**: bcrypt for password hashing
 - **API Testing**: Postman
 

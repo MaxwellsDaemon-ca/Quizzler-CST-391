@@ -1,8 +1,8 @@
-export interface questions {
+export interface Question {
     questionID: number;
     categoryID: number;
     questionText: string;
-    difficulty: 'easy' | 'medium' | 'hard';
+    difficulty: 'Easy' | 'Medium' | 'Hard';
     correctAnswer: string;
     options: string[];    
 }

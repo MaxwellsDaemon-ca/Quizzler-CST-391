@@ -41,7 +41,7 @@ Before running the project, ensure you have the following installed:
     - Run the MySQL script to create the required tables and populate categories.
     - Find the SQL script in `/database/init.sql`.
 
-4. Update tje `.env` file in the root directory and add your database credentials:
+4. Update the `.env` file in the root directory and add your database credentials:
     ```env
     DB_HOST=127.0.0.1
     DB_USER=root

@@ -51,7 +51,7 @@ Before running the project, ensure you have the following installed:
 
 5. Start the development server:
     ```bash
-    npm run dev
+    npm run start
     ```
 
 6. Access the application in your browser at:
@@ -62,4 +62,4 @@ Before running the project, ensure you have the following installed:
 ### Running the Application with Nodemon
 To continuously monitor the project during development, run:
 ```bash
-npm run dev
+npm run start:watch

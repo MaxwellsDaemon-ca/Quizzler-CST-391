@@ -43,9 +43,9 @@ Before running the project, ensure you have the following installed:
 
 4. Create a `.env` file in the root directory and add your database credentials:
     ```env
-    DB_HOST=localhost
+    DB_HOST=127.0.0.1
     DB_USER=root
-    DB_PASSWORD=yourpassword
+    DB_PASSWORD=root
     DB_DATABASE=quizzler
     ```
 

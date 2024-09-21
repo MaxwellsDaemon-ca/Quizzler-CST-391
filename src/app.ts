@@ -3,8 +3,8 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import logger from './middleware/logger.middleware';
-import categoriesRouter from './categories/categories.routes';
-import usersRouter from './users/users.routes';
+import categoriesRouter from './routes/categories.routes';
+import usersRouter from './routes/users.routes';
 
 dotenv.config();
 

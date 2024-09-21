@@ -1,5 +1,5 @@
 import { Request, RequestHandler, Response } from "express";
-import * as UserDao from './users.dao'
+import * as UserDao from '../daos/users.dao'
 import { OkPacket } from "mysql";
 import * as bcrypt from 'bcrypt';
 

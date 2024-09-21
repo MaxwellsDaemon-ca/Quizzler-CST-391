@@ -1,7 +1,7 @@
 import { OkPacket } from "mysql";
 import { execute } from "../services/mysql.connector";
-import { User } from "./users.model";
-import { userQueries } from "./users.queries";
+import { User } from "../models/users.model";
+import { userQueries } from "../queries/users.queries";
 
 export const readUsers = async () => {
     return execute<User>(userQueries.readUsers, []);

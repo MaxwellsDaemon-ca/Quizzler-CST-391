@@ -53,7 +53,49 @@ CREATE TABLE IF NOT EXISTS `leaderboards` (
   PRIMARY KEY (`leaderboardID`),
   KEY `userID` (`userID`),
   KEY `leaderboards_ibfk_2` (`categoryID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
+
+INSERT INTO `leaderboards` (`leaderboardID`, `userID`, `categoryID`, `totalScore`, `isOverall`) VALUES
+(1, 1, 2, 10, 0),
+(2, 1, 3, 10, 0),
+(3, 1, 5, 10, 0),
+(4, 1, 9, 0, 0),
+(5, 1, 13, 300, 0),
+(6, 1, 14, 10, 0),
+(7, 1, 16, 10, 0),
+(8, 2, 2, 10, 0),
+(9, 2, 3, 10, 0),
+(10, 2, 5, 0, 0),
+(11, 2, 9, 10, 0),
+(12, 2, 13, 130, 0),
+(13, 2, 14, 10, 0),
+(14, 2, 16, 10, 0),
+(15, 3, 2, 10, 0),
+(16, 3, 3, 0, 0),
+(17, 3, 5, 10, 0),
+(18, 3, 9, 10, 0),
+(19, 3, 13, 260, 0),
+(20, 3, 14, 10, 0),
+(21, 3, 16, 10, 0),
+(22, 4, 2, 10, 0),
+(23, 4, 3, 10, 0),
+(24, 4, 5, 10, 0),
+(25, 4, 9, 10, 0),
+(26, 4, 13, 280, 0),
+(27, 4, 14, 0, 0),
+(28, 4, 16, 10, 0),
+(29, 5, 2, 10, 0),
+(30, 5, 3, 10, 0),
+(31, 5, 5, 10, 0),
+(32, 5, 9, 10, 0),
+(33, 5, 13, 250, 0),
+(34, 5, 14, 10, 0),
+(35, 5, 16, 0, 0),
+(64, 1, NULL, 350, 1),
+(65, 2, NULL, 180, 1),
+(66, 3, NULL, 310, 1),
+(67, 4, NULL, 330, 1),
+(68, 5, NULL, 300, 1);
 
 DROP TABLE IF EXISTS `questions`;
 CREATE TABLE IF NOT EXISTS `questions` (
@@ -415,7 +457,44 @@ CREATE TABLE IF NOT EXISTS `user_category_scores` (
   PRIMARY KEY (`userCategoryScoreID`),
   KEY `userID` (`userID`),
   KEY `user_category_scores_ibfk_2` (`categoryID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+
+INSERT INTO `user_category_scores` (`userCategoryScoreID`, `userID`, `categoryID`, `score`) VALUES
+(1, 1, 2, 10),
+(2, 1, 3, 10),
+(3, 1, 5, 10),
+(4, 1, 9, 0),
+(5, 1, 13, 300),
+(6, 1, 14, 10),
+(7, 1, 16, 10),
+(8, 2, 2, 10),
+(9, 2, 3, 10),
+(10, 2, 5, 0),
+(11, 2, 9, 10),
+(12, 2, 13, 130),
+(13, 2, 14, 10),
+(14, 2, 16, 10),
+(15, 3, 2, 10),
+(16, 3, 3, 0),
+(17, 3, 5, 10),
+(18, 3, 9, 10),
+(19, 3, 13, 260),
+(20, 3, 14, 10),
+(21, 3, 16, 10),
+(22, 4, 2, 10),
+(23, 4, 3, 10),
+(24, 4, 5, 10),
+(25, 4, 9, 10),
+(26, 4, 13, 280),
+(27, 4, 14, 0),
+(28, 4, 16, 10),
+(29, 5, 2, 10),
+(30, 5, 3, 10),
+(31, 5, 5, 10),
+(32, 5, 9, 10),
+(33, 5, 13, 250),
+(34, 5, 14, 10),
+(35, 5, 16, 0);
 
 DROP TABLE IF EXISTS `user_responses`;
 CREATE TABLE IF NOT EXISTS `user_responses` (

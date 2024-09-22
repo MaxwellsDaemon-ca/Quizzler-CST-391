@@ -1,5 +1,5 @@
 import { Request, RequestHandler, Response } from "express";
-import * as UserDao from '../daos/users.dao'
+import * as UserDao from '../dao/users.dao'
 import { OkPacket } from "mysql";
 import * as bcrypt from 'bcrypt';
 
@@ -98,6 +98,14 @@ export const updateUser: RequestHandler = async (req: Request, res: Response) =>
         });
     }
 };
+
+export const updateUserScore = async (score: number, userID: number) => {
+    try {
+        const okp: OkPacket = await UserDao.updateUserScore(score, userID);
+    } catch (error) {
+        console.error('[users.controller][updateUserScore][Error]: ', error);
+    }
+}
 
 export const deleteUser: RequestHandler = async (req: Request, res: Response) => {
     try {

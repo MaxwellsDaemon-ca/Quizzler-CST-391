@@ -35,6 +35,11 @@ export const userQueries = {
         SET username = ?, email = ?, password = ?
         WHERE userID = ?
     `,
+    updateUserScore: `
+        UPDATE quizzler.users
+        SET totalScore = ?
+        WHERE userID = ?
+    `,
     deleteUser: `
         DELETE FROM quizzler.users
         WHERE userID = ?

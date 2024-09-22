@@ -1,9 +1,9 @@
 export interface UserResponse {
-    responseID: number;
-    userID: number;
-    questionID: number;
-    selectedAnswer: string;
-    isCorrect: boolean;
-    difficulty: 'easy' | 'medium' | 'hard';
-    scoreEarned: number;
+    responseID: number,
+    userID: number,
+    questionID: number,
+    userAnswer: string,
+    isCorrect: boolean,
+    difficulty: 'Easy' | 'Medium' | 'Hard',
+    score: number
 }

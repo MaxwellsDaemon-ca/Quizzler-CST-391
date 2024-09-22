@@ -1,5 +1,5 @@
 import { Request, RequestHandler, Response } from 'express';
-import * as CategoryDao from '../daos/categories.dao';
+import * as CategoryDao from '../dao/categories.dao';
 import { OkPacket } from 'mysql';
 
 export const readCategories: RequestHandler = async (req: Request, res: Response) => {

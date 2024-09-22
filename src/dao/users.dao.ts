@@ -30,6 +30,10 @@ export const updateUser = async (user: User) => {
         [user.username, user.email, user.password, user.userID]);
 };
 
+export const updateUserScore = async (score: number, userID: number) => {
+    return execute<OkPacket>(userQueries.updateUserScore, [score, userID]);
+};
+
 export const deleteUser = async (userID: number) => {
     return execute<OkPacket>(userQueries.deleteUser, [userID]);
 };

@@ -1,5 +1,5 @@
 import { Request, RequestHandler, Response } from 'express';
-import * as QuestionDao from '../daos/questions.dao';
+import * as QuestionDao from '../dao/questions.dao';
 import { OkPacket } from 'mysql';
 
 

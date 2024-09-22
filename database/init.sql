@@ -1,33 +1,12 @@
--- phpMyAdmin SQL Dump
--- version 5.1.2
--- https://www.phpmyadmin.net/
---
--- Host: localhost:3306
--- Generation Time: Sep 21, 2024 at 05:18 AM
--- Server version: 5.7.24
--- PHP Version: 8.0.1
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `quizzler`
---
 CREATE DATABASE IF NOT EXISTS `quizzler` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `quizzler`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `categories`
---
 
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
@@ -36,10 +15,6 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`categoryID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `categories`
---
 
 INSERT INTO `categories` (`categoryID`, `categoryName`, `description`) VALUES
 (1, 'General Knowledge', 'Mixed questions from various categories.'),
@@ -55,7 +30,7 @@ INSERT INTO `categories` (`categoryID`, `categoryName`, `description`) VALUES
 (11, 'Film', 'Questions about movies, directors, and cinematic history.'),
 (12, 'Technology', 'Trivia about tech advancements, history, and key figures.'),
 (13, 'Mythology', 'Questions about various mythologies across cultures.'),
-(14, 'Animals', 'Trivia about wildlife, plants, and ecosystems in the natural world.'),
+(14, 'Nature', 'Trivia about wildlife, plants, and ecosystems in the natural world.'),
 (16, 'Space & Astronomy', 'Trivia about the history of space exploration and astronomy in general.'),
 (17, 'Food & Drink', 'Test your knowledge about cuisine, ingredients, and drinks.'),
 (18, 'SciFi & Fantasy', 'Questions related to the science fiction and fantasy genres.'),
@@ -67,12 +42,6 @@ INSERT INTO `categories` (`categoryID`, `categoryName`, `description`) VALUES
 (24, 'Pop Culture: 1990s', 'Questions about entertainment, music, movies, and celebrities from the 1990s.'),
 (25, 'Pop Culture: 2000s', 'Questions about entertainment, music, movies, and celebrities from the 2000s.'),
 (26, 'Pop Culture: 2010s', 'Questions about entertainment, music, movies, and celebrities from the 2010s.');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `leaderboards`
---
 
 DROP TABLE IF EXISTS `leaderboards`;
 CREATE TABLE IF NOT EXISTS `leaderboards` (
@@ -86,12 +55,6 @@ CREATE TABLE IF NOT EXISTS `leaderboards` (
   KEY `leaderboards_ibfk_2` (`categoryID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `questions`
---
-
 DROP TABLE IF EXISTS `questions`;
 CREATE TABLE IF NOT EXISTS `questions` (
   `questionID` int(11) NOT NULL AUTO_INCREMENT,
@@ -102,11 +65,7 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `options` json DEFAULT NULL,
   PRIMARY KEY (`questionID`),
   KEY `questions_ibfk_1` (`categoryID`)
-) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `questions`
---
+) ENGINE=InnoDB AUTO_INCREMENT=322 DEFAULT CHARSET=utf8;
 
 INSERT INTO `questions` (`questionID`, `categoryID`, `difficulty`, `questionText`, `correctAnswer`, `options`) VALUES
 (1, 13, 'Easy', 'Who is the king of the Greek gods?', 'Zeus', '[\"Zeus\", \"Hades\", \"Poseidon\", \"Apollo\"]'),
@@ -308,13 +267,126 @@ INSERT INTO `questions` (`questionID`, `categoryID`, `difficulty`, `questionText
 (197, 13, 'Hard', 'What is the name of the Greek hero who captured the Golden Fleece with the help of the sorceress Medea?', 'Jason', '[\"Jason\", \"Odysseus\", \"Perseus\", \"Theseus\"]'),
 (198, 13, 'Hard', 'In Japanese mythology, who is the sun goddess who hid in a cave, causing the world to be plunged into darkness?', 'Amaterasu', '[\"Amaterasu\", \"Susanoo\", \"Tsukuyomi\", \"Inari\"]'),
 (199, 13, 'Hard', 'Who is the Roman god of wine and revelry, equivalent to the Greek god Dionysus?', 'Bacchus', '[\"Bacchus\", \"Jupiter\", \"Apollo\", \"Mars\"]'),
-(200, 13, 'Hard', 'In Norse mythology, who is the goddess associated with love, beauty, and fertility, also known as Frigg\'s rival?', 'Freyja', '[\"Freyja\", \"Idunn\", \"Sif\", \"Frigg\"]');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
+(200, 13, 'Hard', 'In Norse mythology, who is the goddess associated with love, beauty, and fertility, also known as Frigg\'s rival?', 'Freyja', '[\"Freyja\", \"Idunn\", \"Sif\", \"Frigg\"]'),
+(203, 2, 'Easy', 'Who painted the Mona Lisa?', 'Leonardo da Vinci', '[\"Leonardo da Vinci\", \"Michelangelo\", \"Vincent van Gogh\", \"Pablo Picasso\"]'),
+(204, 2, 'Easy', 'Who wrote the novel \"Pride and Prejudice\"?', 'Jane Austen', '[\"Jane Austen\", \"Charlotte Brontë\", \"Emily Brontë\", \"Virginia Woolf\"]'),
+(205, 2, 'Easy', 'In which country was Pablo Picasso born?', 'Spain', '[\"Spain\", \"Italy\", \"France\", \"Mexico\"]'),
+(206, 2, 'Easy', 'Who is the author of \"1984\"?', 'George Orwell', '[\"George Orwell\", \"Aldous Huxley\", \"Ray Bradbury\", \"J.K. Rowling\"]'),
+(207, 2, 'Easy', 'Which Shakespeare play features the characters Rosencrantz and Guildenstern?', 'Hamlet', '[\"Hamlet\", \"Macbeth\", \"Othello\", \"King Lear\"]'),
+(208, 2, 'Easy', 'Who wrote the poem \"The Raven\"?', 'Edgar Allan Poe', '[\"Edgar Allan Poe\", \"Robert Frost\", \"William Wordsworth\", \"T.S. Eliot\"]'),
+(209, 2, 'Easy', 'Who painted \"Starry Night\"?', 'Vincent van Gogh', '[\"Vincent van Gogh\", \"Claude Monet\", \"Salvador Dalí\", \"Paul Cézanne\"]'),
+(210, 2, 'Easy', 'In which country is the Louvre Museum located?', 'France', '[\"France\", \"Italy\", \"Spain\", \"Germany\"]'),
+(211, 2, 'Easy', 'Who wrote \"Moby-Dick\"?', 'Herman Melville', '[\"Herman Melville\", \"Charles Dickens\", \"Mark Twain\", \"F. Scott Fitzgerald\"]'),
+(212, 2, 'Easy', 'Which artist is known for the painting \"The Persistence of Memory\"?', 'Salvador Dalí', '[\"Salvador Dalí\", \"René Magritte\", \"Georgia O\'Keeffe\", \"Jackson Pollock\"]'),
+(213, 2, 'Easy', 'What novel begins with \"Call me Ishmael\"?', 'Moby-Dick', '[\"Moby-Dick\", \"The Catcher in the Rye\", \"To Kill a Mockingbird\", \"The Great Gatsby\"]'),
+(214, 2, 'Easy', 'Who wrote \"The Catcher in the Rye\"?', 'J.D. Salinger', '[\"J.D. Salinger\", \"F. Scott Fitzgerald\", \"Ernest Hemingway\", \"William Faulkner\"]'),
+(215, 2, 'Easy', 'Who painted the Sistine Chapel ceiling?', 'Michelangelo', '[\"Michelangelo\", \"Leonardo da Vinci\", \"Raphael\", \"Donatello\"]'),
+(216, 2, 'Easy', 'Which famous artist cut off part of his ear?', 'Vincent van Gogh', '[\"Vincent van Gogh\", \"Pablo Picasso\", \"Henri Matisse\", \"Paul Gauguin\"]'),
+(217, 2, 'Easy', 'Who wrote \"The Picture of Dorian Gray\"?', 'Oscar Wilde', '[\"Oscar Wilde\", \"George Eliot\", \"Thomas Hardy\", \"Henry James\"]'),
+(218, 2, 'Easy', 'Which Greek philosopher wrote \"The Republic\"?', 'Plato', '[\"Plato\", \"Aristotle\", \"Socrates\", \"Epicurus\"]'),
+(219, 2, 'Easy', 'What type of painting is associated with Georges Seurat?', 'Pointillism', '[\"Pointillism\", \"Cubism\", \"Surrealism\", \"Impressionism\"]'),
+(220, 2, 'Easy', 'Who is the author of \"The Great Gatsby\"?', 'F. Scott Fitzgerald', '[\"F. Scott Fitzgerald\", \"Ernest Hemingway\", \"John Steinbeck\", \"Mark Twain\"]'),
+(221, 2, 'Easy', 'Which famous literary character lives at 221B Baker Street?', 'Sherlock Holmes', '[\"Sherlock Holmes\", \"Hercule Poirot\", \"Miss Marple\", \"Sam Spade\"]'),
+(222, 3, 'Easy', 'Which is the largest ocean on Earth?', 'Pacific Ocean', '[\"Pacific Ocean\", \"Atlantic Ocean\", \"Indian Ocean\", \"Arctic Ocean\"]'),
+(223, 3, 'Easy', 'What is the capital of France?', 'Paris', '[\"Paris\", \"London\", \"Berlin\", \"Rome\"]'),
+(224, 3, 'Easy', 'Which continent is the Sahara Desert located in?', 'Africa', '[\"Africa\", \"Asia\", \"Australia\", \"South America\"]'),
+(225, 3, 'Easy', 'What is the longest river in the world?', 'Nile', '[\"Nile\", \"Amazon\", \"Yangtze\", \"Mississippi\"]'),
+(226, 3, 'Easy', 'Which country has the largest population in the world?', 'China', '[\"China\", \"India\", \"United States\", \"Russia\"]'),
+(227, 3, 'Easy', 'What is the capital city of Japan?', 'Tokyo', '[\"Tokyo\", \"Beijing\", \"Seoul\", \"Bangkok\"]'),
+(228, 3, 'Easy', 'Which U.S. state is known as the \"Sunshine State\"?', 'Florida', '[\"Florida\", \"California\", \"Hawaii\", \"Texas\"]'),
+(229, 3, 'Easy', 'Mount Everest is located in which mountain range?', 'Himalayas', '[\"Himalayas\", \"Andes\", \"Rockies\", \"Alps\"]'),
+(230, 3, 'Easy', 'What is the smallest country in the world?', 'Vatican City', '[\"Vatican City\", \"Monaco\", \"Liechtenstein\", \"San Marino\"]'),
+(231, 3, 'Easy', 'Which country is home to the Great Barrier Reef?', 'Australia', '[\"Australia\", \"New Zealand\", \"Fiji\", \"Indonesia\"]'),
+(232, 3, 'Easy', 'Which city is known as \"The Big Apple\"?', 'New York City', '[\"New York City\", \"Los Angeles\", \"Chicago\", \"Miami\"]'),
+(233, 3, 'Easy', 'Which river flows through the city of London?', 'Thames', '[\"Thames\", \"Seine\", \"Danube\", \"Rhine\"]'),
+(234, 3, 'Easy', 'What is the capital of Canada?', 'Ottawa', '[\"Ottawa\", \"Toronto\", \"Montreal\", \"Vancouver\"]'),
+(235, 3, 'Easy', 'Which country is known as the Land of the Rising Sun?', 'Japan', '[\"Japan\", \"China\", \"South Korea\", \"Thailand\"]'),
+(236, 3, 'Easy', 'What is the capital city of Australia?', 'Canberra', '[\"Canberra\", \"Sydney\", \"Melbourne\", \"Brisbane\"]'),
+(237, 3, 'Easy', 'Which country is famous for its tulips and windmills?', 'Netherlands', '[\"Netherlands\", \"Denmark\", \"Belgium\", \"Germany\"]'),
+(238, 3, 'Easy', 'Which desert is the largest hot desert in the world?', 'Sahara', '[\"Sahara\", \"Gobi\", \"Kalahari\", \"Atacama\"]'),
+(239, 3, 'Easy', 'What is the tallest mountain in Africa?', 'Mount Kilimanjaro', '[\"Mount Kilimanjaro\", \"Mount Kenya\", \"Mount Elgon\", \"Ras Dashen\"]'),
+(240, 3, 'Easy', 'Which country is home to the Amazon Rainforest?', 'Brazil', '[\"Brazil\", \"Peru\", \"Colombia\", \"Venezuela\"]'),
+(241, 3, 'Easy', 'Which country is the largest by land area?', 'Russia', '[\"Russia\", \"Canada\", \"United States\", \"China\"]'),
+(242, 5, 'Easy', 'Which band released the song \"Bohemian Rhapsody\"?', 'Queen', '[\"Queen\", \"The Beatles\", \"Pink Floyd\", \"Led Zeppelin\"]'),
+(243, 5, 'Easy', 'Who is known as the \"King of Pop\"?', 'Michael Jackson', '[\"Michael Jackson\", \"Elvis Presley\", \"Prince\", \"David Bowie\"]'),
+(244, 5, 'Easy', 'What is the name of The Beatles\' first album?', 'Please Please Me', '[\"Please Please Me\", \"Abbey Road\", \"Revolver\", \"Help!\"]'),
+(245, 5, 'Easy', 'Which singer is known for the hit song \"Rolling in the Deep\"?', 'Adele', '[\"Adele\", \"Beyoncé\", \"Taylor Swift\", \"Lady Gaga\"]'),
+(246, 5, 'Easy', 'Which classical composer was deaf?', 'Ludwig van Beethoven', '[\"Ludwig van Beethoven\", \"Wolfgang Amadeus Mozart\", \"Johann Sebastian Bach\", \"Franz Schubert\"]'),
+(247, 5, 'Easy', 'Which rock band is known for the album \"Dark Side of the Moon\"?', 'Pink Floyd', '[\"Pink Floyd\", \"Led Zeppelin\", \"The Rolling Stones\", \"Queen\"]'),
+(248, 5, 'Easy', 'Who is the lead singer of U2?', 'Bono', '[\"Bono\", \"Mick Jagger\", \"Freddie Mercury\", \"David Bowie\"]'),
+(249, 5, 'Easy', 'Which instrument does Yo-Yo Ma play?', 'Cello', '[\"Cello\", \"Violin\", \"Piano\", \"Flute\"]'),
+(250, 5, 'Easy', 'What is the highest female singing voice?', 'Soprano', '[\"Soprano\", \"Alto\", \"Mezzo-soprano\", \"Contralto\"]'),
+(251, 5, 'Easy', 'Who sang \"Purple Rain\"?', 'Prince', '[\"Prince\", \"Michael Jackson\", \"Stevie Wonder\", \"David Bowie\"]'),
+(252, 5, 'Easy', 'Which artist is known for \"Like a Virgin\"?', 'Madonna', '[\"Madonna\", \"Whitney Houston\", \"Cyndi Lauper\", \"Cher\"]'),
+(253, 5, 'Easy', 'Which American singer-songwriter is known as the \"Queen of Country\"?', 'Dolly Parton', '[\"Dolly Parton\", \"Loretta Lynn\", \"Patsy Cline\", \"Tammy Wynette\"]'),
+(254, 5, 'Easy', 'What is the title of Beyoncé\'s debut solo album?', 'Dangerously in Love', '[\"Dangerously in Love\", \"B\'Day\", \"Lemonade\", \"I Am... Sasha Fierce\"]'),
+(255, 5, 'Easy', 'Which 1970s rock band is known for the song \"Hotel California\"?', 'Eagles', '[\"Eagles\", \"Fleetwood Mac\", \"The Rolling Stones\", \"The Who\"]'),
+(256, 5, 'Easy', 'Who is known as the \"Godfather of Soul\"?', 'James Brown', '[\"James Brown\", \"Marvin Gaye\", \"Ray Charles\", \"Sam Cooke\"]'),
+(257, 5, 'Easy', 'Which instrument does Elton John famously play?', 'Piano', '[\"Piano\", \"Guitar\", \"Saxophone\", \"Drums\"]'),
+(258, 5, 'Easy', 'Which singer released the hit song \"Billie Jean\"?', 'Michael Jackson', '[\"Michael Jackson\", \"Prince\", \"Madonna\", \"Whitney Houston\"]'),
+(259, 5, 'Easy', 'Who is the lead singer of Aerosmith?', 'Steven Tyler', '[\"Steven Tyler\", \"Robert Plant\", \"Axl Rose\", \"Mick Jagger\"]'),
+(260, 5, 'Easy', 'Which musical genre is known for artists like Tupac and Notorious B.I.G.?', 'Hip Hop', '[\"Hip Hop\", \"Jazz\", \"Country\", \"Rock\"]'),
+(261, 5, 'Easy', 'Who was the lead guitarist of The Jimi Hendrix Experience?', 'Jimi Hendrix', '[\"Jimi Hendrix\", \"Eric Clapton\", \"Jimmy Page\", \"Jeff Beck\"]'),
+(262, 9, 'Easy', 'What is the name of the protagonist in the \"Legend of Zelda\" series?', 'Link', '[\"Link\", \"Zelda\", \"Ganon\", \"Tingle\"]'),
+(263, 9, 'Easy', 'Which video game series features the character Master Chief?', 'Halo', '[\"Halo\", \"Call of Duty\", \"Gears of War\", \"Mass Effect\"]'),
+(264, 9, 'Easy', 'In which game would you use a \"creeper\" as an enemy?', 'Minecraft', '[\"Minecraft\", \"Terraria\", \"Fortnite\", \"Roblox\"]'),
+(265, 9, 'Easy', 'What is the highest-selling video game of all time?', 'Minecraft', '[\"Minecraft\", \"Grand Theft Auto V\", \"Tetris\", \"Fortnite\"]'),
+(266, 9, 'Easy', 'Who is the main character in the \"Super Mario\" series?', 'Mario', '[\"Mario\", \"Luigi\", \"Bowser\", \"Yoshi\"]'),
+(267, 9, 'Easy', 'Which popular video game series is developed by Rockstar Games?', 'Grand Theft Auto', '[\"Grand Theft Auto\", \"Red Dead Redemption\", \"Mafia\", \"Max Payne\"]'),
+(268, 9, 'Easy', 'What type of Pokemon is Pikachu?', 'Electric', '[\"Electric\", \"Water\", \"Fire\", \"Grass\"]'),
+(269, 9, 'Easy', 'What game features the characters \"Lara Croft\"?', 'Tomb Raider', '[\"Tomb Raider\", \"Uncharted\", \"The Last of Us\", \"Far Cry\"]'),
+(270, 9, 'Easy', 'In \"Fortnite,\" what is the goal of \"Battle Royale\" mode?', 'Be the last player standing', '[\"Be the last player standing\", \"Find treasure\", \"Collect resources\", \"Capture the flag\"]'),
+(271, 9, 'Easy', 'Which game is known for the phrase \"The cake is a lie\"?', 'Portal', '[\"Portal\", \"Half-Life\", \"Bioshock\", \"The Stanley Parable\"]'),
+(272, 9, 'Easy', 'Which game franchise has the slogan \"Gotta catch \'em all!\"?', 'Pokemon', '[\"Pokemon\", \"Digimon\", \"Yugioh\", \"Final Fantasy\"]'),
+(273, 9, 'Easy', 'In \"League of Legends,\" what is the name of the character known as the \"Blind Monk\"?', 'Lee Sin', '[\"Lee Sin\", \"Zed\", \"Yasuo\", \"Master Yi\"]'),
+(274, 9, 'Easy', 'What is the name of the main playable character in \"The Witcher\" series?', 'Geralt of Rivia', '[\"Geralt of Rivia\", \"Dandelion\", \"Vesemir\", \"Yennefer\"]'),
+(275, 9, 'Easy', 'Which game features a \"hidden blade\" as the primary weapon?', 'Assassin\'s Creed', '[\"Assassin\'s Creed\", \"Prince of Persia\", \"God of War\", \"Devil May Cry\"]'),
+(276, 9, 'Easy', 'What video game console was released by Sony in 1994?', 'PlayStation', '[\"PlayStation\", \"Xbox\", \"Nintendo 64\", \"Dreamcast\"]'),
+(277, 9, 'Easy', 'Which game series includes the character \"Solid Snake\"?', 'Metal Gear Solid', '[\"Metal Gear Solid\", \"Splinter Cell\", \"Hitman\", \"Deus Ex\"]'),
+(278, 9, 'Easy', 'What is the name of the battle royale game developed by Respawn Entertainment?', 'Apex Legends', '[\"Apex Legends\", \"PUBG\", \"Fortnite\", \"Call of Duty: Warzone\"]'),
+(279, 9, 'Easy', 'In which game do players hunt and capture \"ghosts\" using a device called a \"Proton Pack\"?', 'Ghostbusters', '[\"Ghostbusters\", \"Luigi\'s Mansion\", \"Phasmophobia\", \"Dead by Daylight\"]'),
+(280, 9, 'Easy', 'What year was the original \"Pac-Man\" arcade game released?', '1980', '[\"1980\", \"1975\", \"1985\", \"1990\"]'),
+(281, 9, 'Easy', 'Which video game series features a location called \"San Andreas\"?', 'Grand Theft Auto', '[\"Grand Theft Auto\", \"Fallout\", \"The Elder Scrolls\", \"Saints Row\"]'),
+(282, 16, 'Easy', 'What is the largest planet in our solar system?', 'Jupiter', '[\"Jupiter\", \"Saturn\", \"Mars\", \"Earth\"]'),
+(283, 16, 'Easy', 'What is the closest planet to the Sun?', 'Mercury', '[\"Mercury\", \"Venus\", \"Earth\", \"Mars\"]'),
+(284, 16, 'Easy', 'What is the name of Earth\'s only natural satellite?', 'Moon', '[\"Moon\", \"Mars\", \"Venus\", \"Titan\"]'),
+(285, 16, 'Easy', 'What is the hottest planet in our solar system?', 'Venus', '[\"Venus\", \"Mercury\", \"Mars\", \"Jupiter\"]'),
+(286, 16, 'Easy', 'Which planet is known as the \"Red Planet\"?', 'Mars', '[\"Mars\", \"Jupiter\", \"Saturn\", \"Venus\"]'),
+(287, 16, 'Easy', 'What is the name of the galaxy that contains our Solar System?', 'Milky Way', '[\"Milky Way\", \"Andromeda\", \"Whirlpool\", \"Sombrero\"]'),
+(288, 16, 'Easy', 'Who was the first person to walk on the moon?', 'Neil Armstrong', '[\"Neil Armstrong\", \"Buzz Aldrin\", \"Yuri Gagarin\", \"Alan Shepard\"]'),
+(289, 16, 'Easy', 'Which planet has the most moons?', 'Saturn', '[\"Saturn\", \"Jupiter\", \"Uranus\", \"Mars\"]'),
+(290, 16, 'Easy', 'What is the name of the largest moon of Saturn?', 'Titan', '[\"Titan\", \"Europa\", \"Callisto\", \"Ganymede\"]'),
+(291, 16, 'Easy', 'What is the closest star to Earth?', 'Sun', '[\"Sun\", \"Proxima Centauri\", \"Sirius\", \"Alpha Centauri\"]'),
+(292, 16, 'Easy', 'Which planet is known for its extensive ring system?', 'Saturn', '[\"Saturn\", \"Jupiter\", \"Uranus\", \"Neptune\"]'),
+(293, 16, 'Easy', 'What is the term for a large group of stars held together by gravity?', 'Galaxy', '[\"Galaxy\", \"Cluster\", \"Constellation\", \"Nebula\"]'),
+(294, 16, 'Easy', 'How long does it take for the Earth to orbit the Sun?', '365 days', '[\"365 days\", \"30 days\", \"1000 days\", \"24 hours\"]'),
+(295, 16, 'Easy', 'What is the name of the second planet from the Sun?', 'Venus', '[\"Venus\", \"Mars\", \"Mercury\", \"Earth\"]'),
+(296, 16, 'Easy', 'Which planet is famous for its \"Great Red Spot\"?', 'Jupiter', '[\"Jupiter\", \"Mars\", \"Saturn\", \"Neptune\"]'),
+(297, 16, 'Easy', 'Which space probe was the first to land on a comet?', 'Philae', '[\"Philae\", \"Voyager 1\", \"Curiosity\", \"Cassini\"]'),
+(298, 16, 'Easy', 'What is the term for the point where a planet is closest to the Sun in its orbit?', 'Perihelion', '[\"Perihelion\", \"Aphelion\", \"Equinox\", \"Solstice\"]'),
+(299, 16, 'Easy', 'Which space mission first landed humans on the moon?', 'Apollo 11', '[\"Apollo 11\", \"Apollo 13\", \"Gemini 6\", \"Skylab\"]'),
+(300, 16, 'Easy', 'What is the brightest star in the night sky?', 'Sirius', '[\"Sirius\", \"Polaris\", \"Betelgeuse\", \"Rigel\"]'),
+(301, 16, 'Easy', 'What is the largest moon of Jupiter?', 'Ganymede', '[\"Ganymede\", \"Europa\", \"Callisto\", \"Titan\"]'),
+(302, 14, 'Easy', 'Which animal is known as the \"King of the Jungle\"?', 'Lion', '[\"Lion\", \"Elephant\", \"Tiger\", \"Giraffe\"]'),
+(303, 14, 'Easy', 'What is the largest mammal in the world?', 'Blue Whale', '[\"Blue Whale\", \"Elephant\", \"Hippopotamus\", \"Giraffe\"]'),
+(304, 14, 'Easy', 'What type of tree do acorns come from?', 'Oak', '[\"Oak\", \"Maple\", \"Pine\", \"Cedar\"]'),
+(305, 14, 'Easy', 'How many legs does a spider have?', 'Eight', '[\"Eight\", \"Six\", \"Ten\", \"Four\"]'),
+(306, 14, 'Easy', 'What is the fastest land animal?', 'Cheetah', '[\"Cheetah\", \"Lion\", \"Tiger\", \"Antelope\"]'),
+(307, 14, 'Easy', 'Which bird is known for its colorful tail feathers?', 'Peacock', '[\"Peacock\", \"Flamingo\", \"Parrot\", \"Eagle\"]'),
+(308, 14, 'Easy', 'What is the tallest species of tree?', 'Redwood', '[\"Redwood\", \"Oak\", \"Pine\", \"Maple\"]'),
+(309, 14, 'Easy', 'Which animal is famous for its ability to change color?', 'Chameleon', '[\"Chameleon\", \"Octopus\", \"Cuttlefish\", \"Frog\"]'),
+(310, 14, 'Easy', 'What is the largest species of shark?', 'Whale Shark', '[\"Whale Shark\", \"Great White Shark\", \"Hammerhead Shark\", \"Tiger Shark\"]'),
+(311, 14, 'Easy', 'What is a group of wolves called?', 'Pack', '[\"Pack\", \"Flock\", \"Herd\", \"Swarm\"]'),
+(312, 14, 'Easy', 'Which type of bird is known for its ability to mimic sounds, including human speech?', 'Parrot', '[\"Parrot\", \"Crow\", \"Sparrow\", \"Raven\"]'),
+(313, 14, 'Easy', 'Which mammal is known for laying eggs?', 'Platypus', '[\"Platypus\", \"Kangaroo\", \"Dolphin\", \"Elephant\"]'),
+(314, 14, 'Easy', 'What type of habitat do polar bears live in?', 'Arctic', '[\"Arctic\", \"Tundra\", \"Desert\", \"Savannah\"]'),
+(315, 14, 'Easy', 'Which of the following animals is a marsupial?', 'Kangaroo', '[\"Kangaroo\", \"Elephant\", \"Tiger\", \"Horse\"]'),
+(316, 14, 'Easy', 'What is the only continent where emperor penguins are found in the wild?', 'Antarctica', '[\"Antarctica\", \"Africa\", \"Asia\", \"North America\"]'),
+(317, 14, 'Easy', 'What is the fastest flying bird in the world?', 'Peregrine Falcon', '[\"Peregrine Falcon\", \"Eagle\", \"Hawk\", \"Owl\"]'),
+(318, 14, 'Easy', 'What type of animal is a Komodo Dragon?', 'Lizard', '[\"Lizard\", \"Snake\", \"Frog\", \"Crocodile\"]'),
+(319, 14, 'Easy', 'Which tree species is known for producing sap used to make syrup?', 'Maple', '[\"Maple\", \"Pine\", \"Oak\", \"Birch\"]'),
+(320, 14, 'Easy', 'Which animal is known to have the most powerful bite?', 'Saltwater Crocodile', '[\"Saltwater Crocodile\", \"Great White Shark\", \"Lion\", \"Wolf\"]'),
+(321, 14, 'Easy', 'What type of animal is a dolphin?', 'Mammal', '[\"Mammal\", \"Fish\", \"Reptile\", \"Bird\"]');
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
@@ -325,24 +397,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `totalScore` int(11) DEFAULT '0',
   PRIMARY KEY (`userID`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `users`
---
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 INSERT INTO `users` (`userID`, `username`, `email`, `password`, `totalScore`) VALUES
-(1, 'user1edited', 'user1edited@example.com', '$2b$10$02kwZQ8.1.Qln/htfwJRGuiGq18IUn1skCyc9iY7f4rn2ARnL9lYu', 0),
-(2, 'user2', 'user2@example.com', '25d55ad283aa400af464c76d713c07ad', 0),
-(3, 'user3', 'user3@example.com', '098f6bcd4621d373cade4e832627b4f6', 0),
-(4, 'user4', 'user4@example.com', 'e10adc3949ba59abbe56e057f20f883e', 0),
-(5, 'user5', 'user5@example.com', 'fcea920f7412b5da7be0cf42b8c93759', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_category_scores`
---
+(1, 'user1edited', 'user1edited@example.com', '$2b$10$02kwZQ8.1.Qln/htfwJRGuiGq18IUn1skCyc9iY7f4rn2ARnL9lYu', 350),
+(2, 'user2', 'user2@example.com', '25d55ad283aa400af464c76d713c07ad', 180),
+(3, 'user3', 'user3@example.com', '098f6bcd4621d373cade4e832627b4f6', 310),
+(4, 'user4', 'user4@example.com', 'e10adc3949ba59abbe56e057f20f883e', 330),
+(5, 'user5', 'user5@example.com', 'fcea920f7412b5da7be0cf42b8c93759', 300);
 
 DROP TABLE IF EXISTS `user_category_scores`;
 CREATE TABLE IF NOT EXISTS `user_category_scores` (
@@ -354,12 +416,6 @@ CREATE TABLE IF NOT EXISTS `user_category_scores` (
   KEY `userID` (`userID`),
   KEY `user_category_scores_ibfk_2` (`categoryID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_responses`
---
 
 DROP TABLE IF EXISTS `user_responses`;
 CREATE TABLE IF NOT EXISTS `user_responses` (
@@ -373,39 +429,165 @@ CREATE TABLE IF NOT EXISTS `user_responses` (
   PRIMARY KEY (`responseID`),
   KEY `userID` (`userID`),
   KEY `questionID` (`questionID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8;
 
---
--- Constraints for dumped tables
---
+INSERT INTO `user_responses` (`responseID`, `userID`, `questionID`, `userAnswer`, `isCorrect`, `difficulty`, `scoreEarned`) VALUES
+(1, 1, 12, 'A', 1, 'Easy', 10),
+(2, 2, 32, 'B', 0, 'Medium', 0),
+(3, 3, 45, 'C', 1, 'Hard', 30),
+(4, 4, 60, 'D', 0, 'Easy', 0),
+(5, 5, 73, 'A', 1, 'Medium', 20),
+(6, 1, 90, 'B', 0, 'Hard', 0),
+(7, 2, 104, 'C', 1, 'Easy', 10),
+(8, 3, 150, 'D', 1, 'Medium', 20),
+(9, 4, 122, 'A', 1, 'Hard', 30),
+(10, 5, 140, 'B', 0, 'Easy', 0),
+(11, 1, 55, 'C', 1, 'Medium', 20),
+(12, 2, 37, 'D', 0, 'Hard', 0),
+(13, 3, 118, 'A', 1, 'Easy', 10),
+(14, 4, 178, 'B', 1, 'Medium', 20),
+(15, 5, 190, 'C', 0, 'Hard', 0),
+(16, 1, 105, 'D', 1, 'Easy', 10),
+(17, 2, 36, 'A', 1, 'Medium', 20),
+(18, 3, 150, 'B', 0, 'Hard', 0),
+(19, 4, 80, 'C', 1, 'Easy', 10),
+(20, 5, 130, 'D', 0, 'Medium', 0),
+(21, 1, 5, 'A', 1, 'Hard', 30),
+(22, 2, 25, 'B', 0, 'Easy', 0),
+(23, 3, 44, 'C', 1, 'Medium', 20),
+(24, 4, 111, 'D', 1, 'Hard', 30),
+(25, 5, 169, 'A', 1, 'Easy', 10),
+(26, 1, 17, 'B', 1, 'Medium', 20),
+(27, 2, 76, 'C', 0, 'Hard', 0),
+(28, 3, 83, 'D', 1, 'Easy', 10),
+(29, 4, 120, 'A', 0, 'Medium', 0),
+(30, 5, 145, 'B', 1, 'Hard', 30),
+(31, 1, 12, 'C', 1, 'Easy', 10),
+(32, 2, 91, 'D', 0, 'Medium', 0),
+(33, 3, 167, 'A', 1, 'Hard', 30),
+(34, 4, 19, 'B', 1, 'Easy', 10),
+(35, 5, 62, 'C', 0, 'Medium', 0),
+(36, 1, 100, 'D', 1, 'Hard', 30),
+(37, 2, 120, 'A', 1, 'Easy', 10),
+(38, 3, 50, 'B', 1, 'Medium', 20),
+(39, 4, 12, 'C', 1, 'Hard', 30),
+(40, 5, 43, 'D', 0, 'Easy', 0),
+(41, 1, 74, 'A', 1, 'Medium', 20),
+(42, 2, 111, 'B', 0, 'Hard', 0),
+(43, 3, 133, 'C', 1, 'Easy', 10),
+(44, 4, 148, 'D', 1, 'Medium', 20),
+(45, 5, 190, 'A', 1, 'Hard', 30),
+(46, 1, 100, 'B', 1, 'Easy', 10),
+(47, 2, 130, 'C', 0, 'Medium', 0),
+(48, 3, 160, 'D', 1, 'Hard', 30),
+(49, 4, 30, 'A', 1, 'Easy', 10),
+(50, 5, 65, 'B', 0, 'Medium', 0),
+(51, 1, 199, 'C', 1, 'Hard', 30),
+(52, 2, 132, 'D', 1, 'Easy', 10),
+(53, 3, 22, 'A', 1, 'Medium', 20),
+(54, 4, 47, 'B', 0, 'Hard', 0),
+(55, 5, 77, 'C', 1, 'Easy', 10),
+(56, 1, 153, 'D', 1, 'Medium', 20),
+(57, 2, 12, 'A', 1, 'Hard', 30),
+(58, 3, 29, 'B', 0, 'Easy', 0),
+(59, 4, 88, 'C', 1, 'Medium', 20),
+(60, 5, 120, 'D', 1, 'Hard', 30),
+(61, 1, 135, 'A', 1, 'Easy', 10),
+(62, 2, 147, 'B', 1, 'Medium', 20),
+(63, 3, 192, 'C', 0, 'Hard', 0),
+(64, 4, 30, 'D', 1, 'Easy', 10),
+(65, 5, 67, 'A', 1, 'Medium', 20),
+(66, 1, 155, 'B', 0, 'Hard', 0),
+(67, 2, 176, 'C', 1, 'Easy', 10),
+(68, 3, 102, 'D', 1, 'Medium', 20),
+(69, 4, 188, 'A', 1, 'Hard', 30),
+(70, 5, 35, 'B', 1, 'Easy', 10),
+(71, 1, 60, 'C', 1, 'Medium', 20),
+(72, 2, 99, 'D', 0, 'Hard', 0),
+(73, 3, 122, 'A', 1, 'Easy', 10),
+(74, 4, 185, 'B', 0, 'Medium', 0),
+(75, 5, 180, 'C', 1, 'Hard', 30),
+(76, 1, 45, 'D', 1, 'Easy', 10),
+(77, 2, 130, 'A', 1, 'Medium', 20),
+(78, 3, 98, 'B', 0, 'Hard', 0),
+(79, 4, 35, 'C', 1, 'Easy', 10),
+(80, 5, 165, 'D', 1, 'Medium', 20),
+(81, 1, 150, 'A', 1, 'Hard', 30),
+(82, 2, 45, 'B', 0, 'Easy', 0),
+(83, 3, 97, 'C', 1, 'Medium', 20),
+(84, 4, 67, 'D', 1, 'Hard', 30),
+(85, 5, 18, 'A', 1, 'Easy', 10),
+(86, 1, 160, 'B', 1, 'Medium', 20),
+(87, 2, 198, 'C', 0, 'Hard', 0),
+(88, 3, 77, 'D', 1, 'Easy', 10),
+(89, 4, 149, 'A', 1, 'Medium', 20),
+(90, 5, 34, 'B', 1, 'Hard', 30),
+(91, 1, 210, 'A', 1, 'Easy', 10),
+(92, 2, 215, 'B', 0, 'Easy', 0),
+(93, 3, 220, 'C', 1, 'Easy', 10),
+(94, 4, 225, 'D', 0, 'Easy', 0),
+(95, 5, 230, 'A', 1, 'Easy', 10),
+(96, 1, 235, 'B', 0, 'Easy', 0),
+(97, 2, 240, 'C', 1, 'Easy', 10),
+(98, 3, 245, 'D', 0, 'Easy', 0),
+(99, 4, 250, 'A', 1, 'Easy', 10),
+(100, 5, 255, 'B', 0, 'Easy', 0),
+(101, 1, 260, 'C', 1, 'Easy', 10),
+(102, 2, 265, 'D', 0, 'Easy', 0),
+(103, 3, 270, 'A', 1, 'Easy', 10),
+(104, 4, 275, 'B', 0, 'Easy', 0),
+(105, 5, 280, 'C', 1, 'Easy', 10),
+(106, 1, 285, 'D', 0, 'Easy', 0),
+(107, 2, 290, 'A', 1, 'Easy', 10),
+(108, 3, 295, 'B', 0, 'Easy', 0),
+(109, 4, 300, 'C', 1, 'Easy', 10),
+(110, 5, 305, 'D', 0, 'Easy', 0),
+(111, 1, 310, 'A', 1, 'Easy', 10),
+(112, 2, 315, 'B', 0, 'Easy', 0),
+(113, 3, 320, 'C', 1, 'Easy', 10),
+(114, 4, 209, 'D', 0, 'Easy', 0),
+(115, 5, 211, 'A', 1, 'Easy', 10),
+(116, 1, 216, 'B', 0, 'Easy', 0),
+(117, 2, 221, 'C', 1, 'Easy', 10),
+(118, 3, 226, 'D', 0, 'Easy', 0),
+(119, 4, 231, 'A', 1, 'Easy', 10),
+(120, 5, 236, 'B', 0, 'Easy', 0),
+(121, 1, 241, 'C', 1, 'Easy', 10),
+(122, 2, 246, 'D', 0, 'Easy', 0),
+(123, 3, 251, 'A', 1, 'Easy', 10),
+(124, 4, 256, 'B', 0, 'Easy', 0),
+(125, 5, 261, 'C', 1, 'Easy', 10),
+(126, 1, 266, 'D', 0, 'Easy', 0),
+(127, 2, 271, 'A', 1, 'Easy', 10),
+(128, 3, 276, 'B', 0, 'Easy', 0),
+(129, 4, 281, 'C', 1, 'Easy', 10),
+(130, 5, 286, 'D', 0, 'Easy', 0),
+(131, 1, 291, 'A', 1, 'Easy', 10),
+(132, 2, 296, 'B', 0, 'Easy', 0),
+(133, 3, 301, 'C', 1, 'Easy', 10),
+(134, 4, 306, 'D', 0, 'Easy', 0),
+(135, 5, 311, 'A', 1, 'Easy', 10),
+(136, 1, 316, 'B', 0, 'Easy', 0),
+(137, 2, 321, 'C', 1, 'Easy', 10),
+(138, 3, 206, 'D', 0, 'Easy', 0),
+(139, 4, 213, 'A', 1, 'Easy', 10),
+(140, 5, 218, 'B', 0, 'Easy', 0);
 
---
--- Constraints for table `leaderboards`
---
+
 ALTER TABLE `leaderboards`
   ADD CONSTRAINT `leaderboards_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE,
   ADD CONSTRAINT `leaderboards_ibfk_2` FOREIGN KEY (`categoryID`) REFERENCES `categories` (`categoryID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Constraints for table `questions`
---
 ALTER TABLE `questions`
   ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`categoryID`) REFERENCES `categories` (`categoryID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Constraints for table `user_category_scores`
---
 ALTER TABLE `user_category_scores`
   ADD CONSTRAINT `user_category_scores_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE,
   ADD CONSTRAINT `user_category_scores_ibfk_2` FOREIGN KEY (`categoryID`) REFERENCES `categories` (`categoryID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Constraints for table `user_responses`
---
 ALTER TABLE `user_responses`
   ADD CONSTRAINT `user_responses_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE,
   ADD CONSTRAINT `user_responses_ibfk_2` FOREIGN KEY (`questionID`) REFERENCES `questions` (`questionID`) ON DELETE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

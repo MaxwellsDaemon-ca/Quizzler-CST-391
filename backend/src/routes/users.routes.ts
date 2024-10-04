@@ -16,7 +16,7 @@ router.
     get(UsersController.readUsersByUsername);
 
 router.
-    route('/api/users').
+    route('/api/users/signup').
     post(UsersController.createUser);
 
 router.
@@ -25,6 +25,12 @@ router.
 
 router.
     route('/api/users/:userID').
-    delete(UsersController.deleteUser);
+    delete(UsersController.verifyToken, UsersController.deleteUser);
+
+router.
+    route('/api/users/login').
+    post(UsersController.loginUser);
+
+
 
 export default router;

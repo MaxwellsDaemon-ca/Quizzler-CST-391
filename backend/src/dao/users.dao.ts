@@ -27,7 +27,7 @@ export const createUser = async (user: User) => {
 
 export const updateUser = async (user: User) => {
     return execute<OkPacket>(userQueries.updateUser,
-        [user.username, user.email, user.password, user.userID]);
+        [user.username, user.email, user.password, user.role, user.userID]);
 };
 
 export const updateUserScore = async (score: number, userID: number) => {

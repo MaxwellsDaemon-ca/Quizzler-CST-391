@@ -1,47 +1,47 @@
 export const userQueries = {
-    readUsers: `
+  readUsers: `
         SELECT
             userID AS userID, username AS username, email AS email,
-            password AS passwordHash, totalScore AS totalScore
+            password AS password, totalScore AS totalScore, role AS role
         FROM quizzler.users
     `,
-    readUsersByUserID: `
+  readUsersByUserID: `
         SELECT
             userID AS userID, username AS username, email AS email,
-            password AS passwordHash, totalScore AS totalScore
+            password AS password, totalScore AS totalScore, role AS role
         FROM quizzler.users
         WHERE quizzler.users.userID = ?
     `,
-    readUsersByUsername: `
+  readUsersByUsername: `
         SELECT
             userID AS userID, username AS username, email AS email,
-            password AS passwordHash, totalScore AS totalScore
+            password AS password, totalScore AS totalScore, role AS role
         FROM quizzler.users
         WHERE quizzler.users.username = ?
     `,
-    readUsersBySearchingUsername: `
+  readUsersBySearchingUsername: `
         SELECT
             userID AS userID, username AS username, email AS email,
-            password AS passwordHash, totalScore AS totalScore
+            password AS password, totalScore AS totalScore, role AS role
         FROM quizzler.users
         WHERE quizzler.users.username LIKE ?
     `,
-    createUser: `
-        INSERT INTO users(username, email, password, totalScore)
-        VALUES (?, ?, ?, DEFAULT)
+  createUser: `
+        INSERT INTO users(username, email, password, totalScore, role)
+        VALUES (?, ?, ?, DEFAULT, DEFAULT)
     `,
-    updateUser: `
+  updateUser: `
         UPDATE quizzler.users
-        SET username = ?, email = ?, password = ?
+        SET username = ?, email = ?, password = ?, role = ?
         WHERE userID = ?
     `,
-    updateUserScore: `
+  updateUserScore: `
         UPDATE quizzler.users
         SET totalScore = ?
         WHERE userID = ?
     `,
-    deleteUser: `
+  deleteUser: `
         DELETE FROM quizzler.users
         WHERE userID = ?
-    `
-}
+    `,
+};

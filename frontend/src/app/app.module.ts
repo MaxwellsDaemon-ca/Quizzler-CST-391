@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,9 +15,12 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { QuestionManagementComponent } from './question-management/question-management.component';
 import { CategoryManagementComponent } from './category-management/category-management.component';
-import { LoginSignupComponent } from './login-signup/login-signup.component';
 import { ListQuestionsComponent } from './list-questions/list-questions.component';
 import { ListCategoriesComponent } from './list-categories/list-categories.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -31,17 +35,21 @@ import { ListCategoriesComponent } from './list-categories/list-categories.compo
     AdminPanelComponent,
     QuestionManagementComponent,
     CategoryManagementComponent,
-    LoginSignupComponent,
     ListQuestionsComponent,
-    ListCategoriesComponent
+    ListCategoriesComponent,
+    LoginComponent,
+    SignupComponent,
+    UnauthorizedComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
-    AppRoutingModule
+    HttpClientModule,
+    AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

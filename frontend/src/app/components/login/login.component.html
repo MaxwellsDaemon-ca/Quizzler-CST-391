@@ -1,0 +1,42 @@
+<div class="container login-container">
+  <div class="login-card shadow">
+    <h2 class="text-center">Login to Quizzler</h2>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+    <!-- Login Form -->
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" class="form-control" [(ngModel)]="username" name="username" required autofocus />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" required />
+      </div>
+
+      <div class="form-check mb-2">
+        <input type="checkbox" class="form-check-input" id="rememberMe">
+        <label class="form-check-label" for="rememberMe">Remember Me</label>
+      </div>
+
+      <!-- Login Button -->
+      <button type="submit" class="btn btn-primary btn-block">Login</button>
+    </form>
+
+    <!-- Social Logins -->
+    <div class="social-login mt-3 text-center">
+      <button class="btn btn-outline-secondary">Login with Google</button>
+      <button class="btn btn-outline-secondary">Login with Apple</button>
+      <button class="btn btn-outline-secondary">Login with Microsoft</button>
+    </div>
+
+    <!-- Links -->
+    <div class="text-center mt-3">
+      <a href="#" (click)="forgotPassword()">Forgot Password?</a> |
+      <a [routerLink]="'/signup'">New User? Sign up here!</a>
+    </div>
+  </div>
+</div>

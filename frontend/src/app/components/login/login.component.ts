@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['../signup/signup.component.css'],
 })
 export class LoginComponent {
   username: string = '';
@@ -24,5 +24,9 @@ export class LoginComponent {
         this.errorMessage = 'Login failed. Please try again.';
       },
     });
+  }
+
+  forgotPassword() {
+    alert('Forgot Password functionality coming soon!')
   }
 }

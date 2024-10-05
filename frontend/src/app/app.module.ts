@@ -5,22 +5,22 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { CategorySelectionComponent } from './category-selection/category-selection.component';
-import { DifficultySelectionComponent } from './difficulty-selection/difficulty-selection.component';
-import { QuizComponent } from './quiz/quiz.component';
-import { QuizResultsComponent } from './quiz-results/quiz-results.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
-import { LeaderboardComponent } from './leaderboard/leaderboard.component';
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import { QuestionManagementComponent } from './question-management/question-management.component';
-import { CategoryManagementComponent } from './category-management/category-management.component';
-import { ListQuestionsComponent } from './list-questions/list-questions.component';
-import { ListCategoriesComponent } from './list-categories/list-categories.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
-import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './components/home/home.component';
+import { CategorySelectionComponent } from './components/category-selection/category-selection.component';
+import { DifficultySelectionComponent } from './components/difficulty-selection/difficulty-selection.component';
+import { QuizComponent } from './components/quiz/quiz.component';
+import { QuizResultsComponent } from './components/quiz-results/quiz-results.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { QuestionManagementComponent } from './components/question-management/question-management.component';
+import { CategoryManagementComponent } from './components/category-management/category-management.component';
+import { ListQuestionsComponent } from './components/list-questions/list-questions.component';
+import { ListCategoriesComponent } from './components/list-categories/list-categories.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [

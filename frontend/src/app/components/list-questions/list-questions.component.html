@@ -1,0 +1,8 @@
+<div class="container">
+  <h2>List of Questions</h2>
+  <ul class="list-group">
+    <li *ngFor="let question of questions" class="list-group-item">
+      {{ getCategoryName(question.categoryID) }}: {{ question.difficulty }} - {{ question.questionText }}
+    </li>
+  </ul>
+</div>

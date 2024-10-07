@@ -1,1 +1,138 @@
-<p>category-management works!</p>
+<div class="container">
+  <!-- Category List and Management Section -->
+  <div class="filters text-center">
+    <!-- Create New Category Button -->
+    <button
+      class="btn btn-new-category mb-4"
+      (click)="openCreateCategoryModal()"
+    >
+      Create Category
+    </button>
+  </div>
+
+  <!-- Modal for Creating New Category -->
+  <div
+    class="modal fade"
+    id="createCategoryModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="createCategoryModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createCategoryModalLabel">
+            Create New Category
+          </h5>
+          <!-- Close button for modal -->
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="closeCreateCategoryModal()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <!-- Modal body with form for creating a new category -->
+        <div class="modal-body">
+          <form (ngSubmit)="createCategory()">
+            <!-- Input for new category name -->
+            <div class="form-group">
+              <label for="newCategoryName">Category Name</label>
+              <input
+                type="text"
+                id="newCategoryName"
+                [(ngModel)]="newCategoryName"
+                name="newCategoryName"
+                class="form-control mb-3"
+                required
+              />
+            </div>
+            <!-- Input for new category description -->
+            <div class="form-group">
+              <label for="newCategoryDescription">Category Description</label>
+              <textarea
+                id="newCategoryDescription"
+                [(ngModel)]="newCategoryDescription"
+                name="newCategoryDescription"
+                class="form-control mb-3"
+                rows="4"
+              ></textarea>
+            </div>
+            <!-- Submit button for creating a new category -->
+            <button type="submit" class="btn btn-new-category">
+              Create Category
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <!-- Category List Section -->
+    <div class="row align-items-baseline justify-content-center">
+      <!-- Category list, takes up more space when no category is selected -->
+      <div
+        class="col-md-{{
+          selectedCategory ? '5' : '10'
+        }} scrollable text-center"
+      >
+        <app-list-categories
+          [categories]="categories"
+          (categorySelected)="onSelectCategory($event)"
+        ></app-list-categories>
+      </div>
+
+      <!-- Category Details Section -->
+      <!-- Displays category details for editing when a category is selected -->
+      <div class="col-md-5" *ngIf="selectedCategory">
+        <div class="card p-3">
+          <h3>Edit Category</h3>
+          <form (ngSubmit)="updateCategory()">
+            <!-- Input for editing the category name -->
+            <div class="form-group">
+              <label for="categoryName">Category Name</label>
+              <input
+                type="text"
+                id="categoryName"
+                [(ngModel)]="selectedCategory.category"
+                name="categoryName"
+                class="form-control mb-3"
+                required
+              />
+            </div>
+            <!-- Input for editing the category description -->
+            <div class="form-group">
+              <label for="categoryDescription">Category Description</label>
+              <textarea
+                id="categoryDescription"
+                [(ngModel)]="selectedCategory.description"
+                name="categoryDescription"
+                class="form-control mb-3"
+                rows="4"
+              ></textarea>
+            </div>
+            <!-- Update and Delete buttons for the selected category -->
+            <div class="d-flex justify-content-between">
+              <button type="submit" class="btn btn-update">
+                Update Category
+              </button>
+              <button
+                type="button"
+                class="btn btn-delete"
+                (click)="deleteCategory()"
+              >
+                Delete Category
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

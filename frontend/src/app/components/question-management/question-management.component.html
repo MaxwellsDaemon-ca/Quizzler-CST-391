@@ -1,1 +1,321 @@
-<p>question-management works!</p>
+<div class="container mt-4">
+  <!-- Filter Section -->
+  <div class="filters text-center">
+    <!-- Search Bar -->
+    <input
+      #searchInput
+      type="text"
+      class="form-control mb-3"
+      placeholder="Search..."
+      (input)="onSearch($event)"
+    />
+
+    <!-- Dropdowns for Category and Difficulty -->
+    <div class="d-inline-flex justify-content-center mb-3">
+      <!-- Categories Dropdown -->
+      <div class="custom-dropdown col-lg-5 pe-2">
+        <div class="dropdown-header" (click)="toggleDropdown()">
+          {{ selectedCategory || "Select Categories" }}
+          <i class="fa fa-chevron-down"></i>
+        </div>
+        <div class="dropdown-list" *ngIf="dropdownOpen">
+          <div class="dropdown-item" (click)="selectCategory('', searchInput)">
+            All Categories
+          </div>
+          <div
+            *ngFor="let category of categories"
+            class="dropdown-item"
+            (click)="selectCategory(category.category, searchInput)"
+          >
+            {{ category.category }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Difficulty Dropdown -->
+      <div class="custom-dropdown col-lg-5 ps-2">
+        <div class="dropdown-header" (click)="toggleDropdownDifficulty()">
+          {{ selectedDifficulty || "Select Difficulty" }}
+          <i class="fa fa-chevron-down"></i>
+        </div>
+        <div class="dropdown-list" *ngIf="dropdownOpenDifficulty">
+          <div
+            class="dropdown-item"
+            (click)="selectDifficulty('', searchInput)"
+          >
+            All Difficulties
+          </div>
+          <div
+            class="dropdown-item"
+            (click)="selectDifficulty('Easy', searchInput)"
+          >
+            Easy
+          </div>
+          <div
+            class="dropdown-item"
+            (click)="selectDifficulty('Medium', searchInput)"
+          >
+            Medium
+          </div>
+          <div
+            class="dropdown-item"
+            (click)="selectDifficulty('Hard', searchInput)"
+          >
+            Hard
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create New Question Button -->
+  <div class="text-center mb-4">
+    <button class="btn btn-new-question" (click)="openCreateQuestionModal()">
+      Create New Question
+    </button>
+  </div>
+
+  <!-- Question Management Section -->
+  <div class="container-fluid">
+    <div class="row align-items-baseline justify-content-center">
+      <!-- List of Questions -->
+      <div
+        class="col-md-{{
+          selectedQuestion ? '5' : '10'
+        }} scrollable text-center"
+      >
+        <app-list-questions
+          [questions]="filteredQuestions"
+          (questionSelected)="onQuestionSelected($event)"
+        ></app-list-questions>
+
+        <!-- No results found message -->
+        <div
+          *ngIf="filteredQuestions.length === 0 && isFiltered"
+          class="no-results"
+        >
+          No items found with the selected filters.
+        </div>
+      </div>
+
+      <!-- Edit Question Section -->
+      <div *ngIf="selectedQuestion" class="col-md-5">
+        <div class="card mt-3">
+          <div class="card-body">
+            <h5>Edit Question</h5>
+            <!-- Edit Question Text -->
+            <label>Question Text:</label>
+            <input
+              type="text"
+              class="form-control mb-3"
+              [(ngModel)]="selectedQuestion.questionText"
+            />
+
+            <!-- Edit Category Dropdown -->
+            <label>Category:</label>
+            <select
+              class="form-select mb-3"
+              [(ngModel)]="selectedQuestion.categoryID"
+            >
+              <option
+                *ngFor="let category of categories"
+                [value]="category.categoryID"
+              >
+                {{ category.category }}
+              </option>
+            </select>
+
+            <!-- Edit Difficulty Dropdown -->
+            <label>Difficulty:</label>
+            <select
+              class="form-select mb-3"
+              [(ngModel)]="selectedQuestion.difficulty"
+            >
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+            </select>
+
+            <!-- Edit Correct Answer -->
+            <label>Correct Answer:</label>
+            <input
+              type="text"
+              class="form-control mb-3"
+              [(ngModel)]="selectedQuestion.correctAnswer"
+            />
+
+            <!-- Edit Options with Tooltip -->
+            <label
+              >Options:
+              <i
+                class="fas fa-question-circle tooltip"
+                data-bs-toggle="tooltip"
+                data-bs-placement="right"
+                title="One answer per line, only 4 answers, one answer needs to match the correct answer."
+              ></i>
+            </label>
+            <textarea
+              class="form-control mb-3"
+              [(ngModel)]="optionsText"
+              rows="4"
+            ></textarea>
+
+            <!-- Update/Delete Buttons -->
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-update" (click)="editQuestion()">
+                Update Question
+              </button>
+              <button
+                class="btn btn-delete"
+                (click)="deleteQuestion(selectedQuestion.questionID)"
+              >
+                Delete Question
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create Question Modal -->
+<div
+  class="modal fade"
+  id="createQuestionModal"
+  tabindex="-1"
+  aria-labelledby="createQuestionModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createQuestionModalLabel">
+          Create New Question
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="createQuestion()">
+          <!-- New Question Text -->
+          <div class="form-group mb-3">
+            <label for="questionText">Question Text</label>
+            <textarea
+              id="questionText"
+              [(ngModel)]="newQuestion.questionText"
+              name="text"
+              class="form-control"
+              rows="3"
+              placeholder="Enter the question text"
+            ></textarea>
+          </div>
+
+          <!-- Category Dropdown -->
+          <div class="form-group mb-3">
+            <label>Category</label>
+            <div class="custom-dropdown col-lg-5 pe-2">
+              <div class="dropdown-header" (click)="toggleDropdown()">
+                {{ newQuestionCategory || "Select a Category" }}
+                <i class="fa fa-chevron-down"></i>
+              </div>
+              <div class="dropdown-list" *ngIf="dropdownOpen">
+                <div
+                  *ngFor="let category of categories"
+                  class="dropdown-item"
+                  (click)="newQuestionCategorySelection(category.category)"
+                >
+                  {{ category.category }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Difficulty Dropdown -->
+          <div class="custom-dropdown form-group mb-3">
+            <label>Difficulty</label>
+            <div class="dropdown-header" (click)="toggleDropdownDifficulty()">
+              {{ newQuestionDiff || "Select Difficulty" }}
+              <i class="fa fa-chevron-down"></i>
+            </div>
+            <div class="dropdown-list" *ngIf="dropdownOpenDifficulty">
+              <div
+                class="dropdown-item"
+                (click)="newQuestionDifficultySelection('')"
+              >
+                All Difficulties
+              </div>
+              <div
+                class="dropdown-item"
+                (click)="newQuestionDifficultySelection('Easy')"
+              >
+                Easy
+              </div>
+              <div
+                class="dropdown-item"
+                (click)="newQuestionDifficultySelection('Medium')"
+              >
+                Medium
+              </div>
+              <div
+                class="dropdown-item"
+                (click)="newQuestionDifficultySelection('Hard')"
+              >
+                Hard
+              </div>
+            </div>
+          </div>
+
+          <!-- Correct Answer Input -->
+          <div class="form-group mb-3">
+            <label for="correctAnswer">Correct Answer</label>
+            <input
+              type="text"
+              id="correctAnswer"
+              [(ngModel)]="newQuestion.correctAnswer"
+              name="correctAnswer"
+              class="form-control"
+              placeholder="Enter the correct answer"
+            />
+          </div>
+
+          <!-- Options Text Area -->
+          <div class="form-group mb-3">
+            <label for="options">
+              Options
+              <i
+                class="fa fa-question-circle"
+                title="One answer per line, only 4 answers, one answer needs to match the correct answer."
+              ></i>
+            </label>
+            <textarea
+              id="options"
+              [(ngModel)]="newQuestionOptions"
+              name="options"
+              class="form-control"
+              rows="4"
+            ></textarea>
+          </div>
+
+          <!-- Modal Footer Buttons -->
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Create Question
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

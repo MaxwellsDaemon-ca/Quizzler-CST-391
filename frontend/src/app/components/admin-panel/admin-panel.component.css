@@ -1,0 +1,38 @@
+/* General styling for transparent card */
+.card {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding-top: 50px;
+}
+
+.nav-tabs {
+  justify-content: center;
+  position: absolute;
+  top: -44px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+}
+
+.nav-tabs .nav-link {
+  border: none;
+  border-radius: 15px 15px 0 0;
+  background-color: #f8f9fa;
+  margin: 0 10px;
+  padding: 10px 20px;
+  z-index: 1;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: white;
+  border-bottom: 2px, rgb(255, 255, 255, 0.5);
+}
+
+.tab-content {
+  margin-top: 20px;
+}

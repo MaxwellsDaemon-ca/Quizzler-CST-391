@@ -1,1 +1,61 @@
-<p>admin-panel works!</p>
+<div class="container mt-5">
+  <!-- Card container for tabs -->
+  <div class="card mb-4">
+    <!-- Tabs navigation -->
+    <ul class="nav nav-tabs" role="tablist">
+      <!-- Question Management Tab -->
+      <li class="nav-item">
+        <a
+          class="nav-link active"
+          id="tab-questions"
+          data-bs-toggle="tab"
+          href="#questions"
+          role="tab"
+          aria-controls="questions"
+          aria-selected="true"
+        >
+          Question Management
+        </a>
+      </li>
+      <!-- Category Management Tab -->
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          id="tab-categories"
+          data-bs-toggle="tab"
+          href="#categories"
+          role="tab"
+          aria-controls="categories"
+          aria-selected="false"
+        >
+          Category Management
+        </a>
+      </li>
+    </ul>
+
+    <!-- Tab content -->
+    <div class="tab-content">
+      <!-- Question Management Tab Pane -->
+      <div
+        class="tab-pane fade show active"
+        id="questions"
+        role="tabpanel"
+        aria-labelledby="tab-questions"
+      >
+        <!-- Load Question Management component -->
+        <app-question-management></app-question-management>
+      </div>
+
+      <!-- Category Management Tab Pane -->
+      <div
+        class="tab-pane fade"
+        id="categories"
+        role="tabpanel"
+        aria-labelledby="tab-categories"
+      >
+        <!-- Load Category Management component -->
+        <app-category-management></app-category-management>
+      </div>
+    </div>
+  </div>
+</div>

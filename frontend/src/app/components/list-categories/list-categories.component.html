@@ -1,15 +1,16 @@
-<div class="container mt-4">
-  <h2 class="text-center">Categories</h2>
-
-  <div *ngIf="categories.length > 0; else noCategories">
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let category of categories">
-        {{ category.category }} (ID: {{ category.categoryID }})
-      </li>
-    </ul>
-  </div>
-
-  <ng-template #noCategories>
-    <p class="text-center text-muted">No categories available.</p>
-  </ng-template>
+<!-- Scrollable List Container -->
+<div class="scrollable-list">
+  <!-- Unordered List for Displaying Categories -->
+  <ul class="list-group">
+    <!-- Loop through categories and create a list item for each category -->
+    <li
+      class="list-group-item"
+      *ngFor="let category of categories"
+      [ngClass]="{ selected: category === selectedCategory }"
+      (click)="selectCategory(category)"
+    >
+      {{ category.category }}
+      <!-- Display the category name -->
+    </li>
+  </ul>
 </div>

@@ -1,0 +1,22 @@
+.scrollable-list {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: 1000px;
+}
+
+.selected {
+  background-color: #f7dbd1;
+  border-left: 5px solid #db7241;
+  color: #f56715;
+}
+
+.list-group-item {
+  padding: 10px;
+}
+
+.list-group-item:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}

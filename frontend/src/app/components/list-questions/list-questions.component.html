@@ -1,8 +1,18 @@
-<div class="container">
-  <h2>List of Questions</h2>
+<!-- Scrollable list container -->
+<div class="scrollable-list">
+  <!-- List group to display the questions -->
   <ul class="list-group">
-    <li *ngFor="let question of questions" class="list-group-item">
-      {{ getCategoryName(question.categoryID) }}: {{ question.difficulty }} - {{ question.questionText }}
+    <!-- Iterate through each question in the questions array using ngFor -->
+    <li
+      class="list-group-item"
+      *ngFor="let question of questions"
+      [ngClass]="{ 'selected-question': question === selectedQuestion }"
+      (click)="onSelectQuestion(question)"
+    >
+      <!-- Emit the selected question when clicked -->
+      <!-- Display the category name, difficulty, and question text for each question -->
+      {{ getCategoryName(question.categoryID) }}: {{ question.difficulty }} -
+      {{ question.questionText }}
     </li>
   </ul>
 </div>

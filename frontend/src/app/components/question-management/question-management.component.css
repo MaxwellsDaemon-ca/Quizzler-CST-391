@@ -1,0 +1,89 @@
+.scrollable {
+  max-height: 800px;
+  overflow-y: auto;
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+input {
+  border: 2px solid #feb47b;
+  border-radius: 5px;
+}
+
+input:focus {
+  border-color: #ff7e5f;
+  box-shadow: 0 0 8px rgba(255, 126, 95, 0.5);
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-height: 100%;
+}
+
+.no-results {
+  text-align: center;
+  font-size: 1.2em;
+  color: #999;
+}
+
+/* Button Styles */
+.btn-new-question {
+  background-color: #ff7e5f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.btn-update {
+  background-color: #feb47b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.btn-delete {
+  background-color: #ff8c94;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.btn-new-question:hover,
+.btn-update:hover,
+.btn-delete:hover {
+  opacity: 0.85;
+}
+
+.filters {
+  margin-bottom: 15px;
+}
+
+.filters select {
+  margin-right: 10px;
+}
+
+.row.align-items-center {
+  align-items: center;
+  height: 100%;
+}
+
+.fas.fa-question-circle {
+  color: #ff7e5f;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.tooltip {
+  opacity: 1 !important;
+  transition: opacity 10s ease-in-out !important;
+}

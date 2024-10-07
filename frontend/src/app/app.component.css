@@ -1,26 +1,32 @@
 /* Global styles */
 body .component {
-  background: linear-gradient(135deg, #ffe29f, #ff8c94); /* Warm tones to match header and navbar */
+  background: linear-gradient(135deg, #ffe29f, #ff8c94);
   background-attachment: fixed;
   background-size: cover;
   min-height: 100vh;
   padding: 0;
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
+footer {
+  background: linear-gradient(135deg, #ffe29f, #ff8c94);
+  background-attachment: fixed;
+  background-size: cover;
+  max-height: 100px;
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
 
-
-/* Optionally, you can style components with borders/shadows globally */
 .container .card {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+  background-color: rgba(255, 255, 255, 0.9);
   margin: 20px;
 }
 
-/* Add spacing for text inside cards */
 .container .card-body {
   padding: 20px;
 }

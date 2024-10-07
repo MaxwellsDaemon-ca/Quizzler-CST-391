@@ -1,74 +1,82 @@
 <head>
-  <!-- Bootstrap CSS -->
+  <!-- Importing Bootstrap CSS for styling and layout support -->
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
   />
-  <!-- Font Awesome Icons -->
+
+  <!-- Importing Font Awesome for using icons across the website -->
   <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     rel="stylesheet"
   />
+
+  <!-- Custom styling for the navigation bar -->
   <style>
+    /* Navbar background gradient and bottom border */
     .navbar-custom {
-      background: linear-gradient(
-        90deg,
-        #ff7e5f,
-        #feb47b
-      ); /* Similar gradient to the header but altered */
-      border-bottom: 3px solid #ff6f61; /* Adds a distinct bottom border */
+      background: linear-gradient(90deg, #ff7e5f, #feb47b);
+      border-bottom: 3px solid #ff6f61;
     }
 
+    /* Styling for the brand name in the navbar */
     .navbar-brand {
       font-size: 1.5rem;
       font-weight: bold;
       color: white;
     }
 
+    /* Styling for the navigation links within the navbar */
     .navbar-nav .nav-link {
       color: white;
     }
 
+    /* Hover effect for navigation links */
     .navbar-nav .nav-link:hover {
-      color: #ffebcd; /* Lightened color for hover */
+      color: #ffebcd;
     }
 
+    /* Customizing the navbar toggle button for small screens */
     .navbar-toggler {
-      border-color: rgba(
-        255,
-        255,
-        255,
-        0.5
-      ); /* Lightened the toggle button border */
+      border-color: rgba(255, 255, 255, 0.5);
     }
 
+    /* Customizing the icon for the toggle button */
     .navbar-toggler-icon {
       background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
     }
 
+    /* Aligning the collapsed navbar contents centrally */
     .navbar-collapse {
       text-align: center;
     }
 
+    /* Customizing the dropdown menu background in the navbar */
     .navbar-custom .dropdown-menu {
-      background-color: #ff8c00; /* Matches the gradient colors */
+      background-color: #ff8c00;
     }
 
+    /* Styling for individual dropdown items */
     .navbar-custom .dropdown-item {
       color: white;
     }
 
+    /* Hover effect for dropdown items */
     .navbar-custom .dropdown-item:hover {
-      background-color: #ff6f61; /* Subtle hover effect */
+      background-color: #ff6f61;
       color: #fff;
     }
   </style>
 </head>
+
 <body>
-  <!-- Navbar -->
+  <!-- Navbar component for navigation across the website -->
   <nav class="navbar navbar-expand-lg navbar-custom p-0">
     <div class="container">
+      <!-- Brand name linking back to the home page -->
       <a class="navbar-brand" href="#"><i class="fa fa-home"></i> Quizzler</a>
+
+      <!-- Toggle button for collapsing the navbar on smaller screens -->
       <button
         class="navbar-toggler"
         type="button"
@@ -80,11 +88,16 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+
+      <!-- Collapsible content of the navbar -->
       <div class="collapse navbar-collapse" id="navbarNav">
+        <!-- Main navigation links on the left side of the navbar -->
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link" routerLink="/home">Home</a>
           </li>
+
+          <!-- Dropdown for quizzes with various options -->
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -93,8 +106,9 @@
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              >Quizzes</a
             >
+              Quizzes
+            </a>
             <ul class="dropdown-menu" aria-labelledby="quizzesDropdown">
               <li>
                 <a class="dropdown-item" routerLink="/random">Random Quiz</a>
@@ -104,12 +118,16 @@
               </li>
             </ul>
           </li>
+
+          <!-- Link to the leaderboards page -->
           <li class="nav-item">
             <a class="nav-link" routerLink="/leaderboards">Leaderboards</a>
           </li>
         </ul>
 
+        <!-- Conditional rendering of user-related options based on login state -->
         <ul class="navbar-nav ms-auto">
+          <!-- If the user is logged in, show user-specific options -->
           <li class="nav-item dropdown" *ngIf="isLoggedIn">
             <a
               class="nav-link dropdown-toggle"
@@ -125,30 +143,38 @@
               <li>
                 <a class="dropdown-item" routerLink="/userpage">Userpage</a>
               </li>
+              <!-- If the logged-in user has admin privileges, show admin access -->
               <li *ngIf="isAdmin()">
                 <a class="dropdown-item" [routerLink]="['/admin']"
                   >Admin Access</a
                 >
               </li>
+              <!-- Logout button for users -->
               <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
             </ul>
           </li>
 
+          <!-- If the user is not logged in, show login/signup options -->
           <li class="nav-item" *ngIf="!isLoggedIn">
-            <a class="nav-link" routerLink="/login"
-              ><i class="fa fa-sign-in-alt"></i> Login/Signup</a
-            >
+            <a class="nav-link" routerLink="/login">
+              <i class="fa fa-sign-in-alt"></i> Login/Signup
+            </a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 
+  <!-- Placeholder for header and content components -->
   <app-header />
 
-  <div class="component">
-      <router-outlet />
+  <!-- Main container where router views will be injected -->
+  <div class="component container-fluid" style="padding-top: 30px">
+    <router-outlet />
   </div>
-  <!-- Bootstrap JS -->
+
+  <!-- Bootstrap JavaScript bundle for interaction and components -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
+<footer></footer>

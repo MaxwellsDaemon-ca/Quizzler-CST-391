@@ -22,6 +22,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { HeaderComponent } from './components/header/header.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

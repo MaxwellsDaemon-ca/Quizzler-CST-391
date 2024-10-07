@@ -1,23 +1,17 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+CREATE DATABASE IF NOT EXISTS quizzler DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE quizzler;
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+DROP TABLE IF EXISTS categories;
+CREATE TABLE IF NOT EXISTS categories (
+  categoryID int(11) NOT NULL AUTO_INCREMENT,
+  categoryName varchar(100) NOT NULL,
+  description varchar(255) DEFAULT NULL,
+  PRIMARY KEY (categoryID)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
-CREATE DATABASE IF NOT EXISTS `quizzler` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `quizzler`;
-
-DROP TABLE IF EXISTS `categories`;
-CREATE TABLE IF NOT EXISTS `categories` (
-  `categoryID` int(11) NOT NULL AUTO_INCREMENT,
-  `categoryName` varchar(100) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`categoryID`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
-
-INSERT INTO `categories` (`categoryID`, `categoryName`, `description`) VALUES
-(1, 'General Knowledge', 'Mixed questions from various categories.'),
+INSERT INTO categories (categoryID, categoryName, description) VALUES
+(1, 'General Knowledge', 'Mixed questions from all categories.'),
 (2, 'Art & Literature', 'Questions related to famous works of art and literature.'),
 (3, 'Geography', 'Questions about world locations, capitals, and landmarks.'),
 (4, 'History', 'Test your knowledge of world history.'),
@@ -34,28 +28,28 @@ INSERT INTO `categories` (`categoryID`, `categoryName`, `description`) VALUES
 (16, 'Space & Astronomy', 'Trivia about the history of space exploration and astronomy in general.'),
 (17, 'Food & Drink', 'Test your knowledge about cuisine, ingredients, and drinks.'),
 (18, 'SciFi & Fantasy', 'Questions related to the science fiction and fantasy genres.'),
-(19, 'Health & Medicine', 'Trivia about health, diseases, and the medical field.'),
 (20, 'Language', 'Test your knowledge about languages and linguistics.'),
 (21, 'Pop Culture: 1960s', 'Questions about entertainment, music, movies, and celebrities from the 1960s.'),
 (22, 'Pop Culture: 1970s', 'Questions about entertainment, music, movies, and celebrities from the 1970s.'),
 (23, 'Pop Culture: 1980s', 'Questions about entertainment, music, movies, and celebrities from the 1980s.'),
 (24, 'Pop Culture: 1990s', 'Questions about entertainment, music, movies, and celebrities from the 1990s.'),
 (25, 'Pop Culture: 2000s', 'Questions about entertainment, music, movies, and celebrities from the 2000s.'),
-(26, 'Pop Culture: 2010s', 'Questions about entertainment, music, movies, and celebrities from the 2010s.');
+(26, 'Pop Culture: 2010s', 'Questions about entertainment, music, movies, and celebrities from the 2010s.'),
+(28, 'Health & Medicine', 'A category that tests your knowledge on various health practices and medicinal knowledge');
 
-DROP TABLE IF EXISTS `leaderboards`;
-CREATE TABLE IF NOT EXISTS `leaderboards` (
-  `leaderboardID` int(11) NOT NULL AUTO_INCREMENT,
-  `userID` int(11) DEFAULT NULL,
-  `categoryID` int(11) DEFAULT NULL,
-  `totalScore` int(11) DEFAULT '0',
-  `isOverall` tinyint(1) NOT NULL,
-  PRIMARY KEY (`leaderboardID`),
-  KEY `userID` (`userID`),
-  KEY `leaderboards_ibfk_2` (`categoryID`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS leaderboards;
+CREATE TABLE IF NOT EXISTS leaderboards (
+  leaderboardID int(11) NOT NULL AUTO_INCREMENT,
+  userID int(11) DEFAULT NULL,
+  categoryID int(11) DEFAULT NULL,
+  totalScore int(11) DEFAULT '0',
+  isOverall tinyint(1) NOT NULL,
+  PRIMARY KEY (leaderboardID),
+  KEY userID (userID),
+  KEY leaderboards_ibfk_2 (categoryID)
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
 
-INSERT INTO `leaderboards` (`leaderboardID`, `userID`, `categoryID`, `totalScore`, `isOverall`) VALUES
+INSERT INTO leaderboards (leaderboardID, userID, categoryID, totalScore, isOverall) VALUES
 (1, 1, 2, 10, 0),
 (2, 1, 3, 10, 0),
 (3, 1, 5, 10, 0),
@@ -97,21 +91,19 @@ INSERT INTO `leaderboards` (`leaderboardID`, `userID`, `categoryID`, `totalScore
 (67, 4, NULL, 330, 1),
 (68, 5, NULL, 300, 1);
 
-DROP TABLE IF EXISTS `questions`;
-CREATE TABLE IF NOT EXISTS `questions` (
-  `questionID` int(11) NOT NULL AUTO_INCREMENT,
-  `categoryID` int(11) DEFAULT NULL,
-  `difficulty` enum('Easy','Medium','Hard') NOT NULL,
-  `questionText` text NOT NULL,
-  `correctAnswer` varchar(100) NOT NULL,
-  `options` json DEFAULT NULL,
-  PRIMARY KEY (`questionID`),
-  KEY `questions_ibfk_1` (`categoryID`)
-) ENGINE=InnoDB AUTO_INCREMENT=322 DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS questions;
+CREATE TABLE IF NOT EXISTS questions (
+  questionID int(11) NOT NULL AUTO_INCREMENT,
+  categoryID int(11) DEFAULT NULL,
+  difficulty enum('Easy','Medium','Hard') NOT NULL,
+  questionText text NOT NULL,
+  correctAnswer varchar(100) NOT NULL,
+  options json DEFAULT NULL,
+  PRIMARY KEY (questionID),
+  KEY questions_ibfk_1 (categoryID)
+) ENGINE=InnoDB AUTO_INCREMENT=332 DEFAULT CHARSET=utf8;
 
-INSERT INTO `questions` (`questionID`, `categoryID`, `difficulty`, `questionText`, `correctAnswer`, `options`) VALUES
-(1, 13, 'Easy', 'Who is the king of the Greek gods?', 'Zeus', '[\"Zeus\", \"Hades\", \"Poseidon\", \"Apollo\"]'),
-(2, 13, 'Easy', 'In Egyptian mythology, who is the god of the sun?', 'Ra', '[\"Ra\", \"Anubis\", \"Osiris\", \"Horus\"]'),
+INSERT INTO questions (questionID, categoryID, difficulty, questionText, correctAnswer, options) VALUES
 (3, 13, 'Easy', 'Which Norse god wields the hammer Mjölnir?', 'Thor', '[\"Thor\", \"Odin\", \"Loki\", \"Balder\"]'),
 (4, 13, 'Easy', 'Who is the Greek goddess of wisdom?', 'Athena', '[\"Athena\", \"Aphrodite\", \"Hera\", \"Artemis\"]'),
 (5, 13, 'Easy', 'In Roman mythology, who is the god of war?', 'Mars', '[\"Mars\", \"Jupiter\", \"Mercury\", \"Apollo\"]'),
@@ -428,38 +420,49 @@ INSERT INTO `questions` (`questionID`, `categoryID`, `difficulty`, `questionText
 (318, 14, 'Easy', 'What type of animal is a Komodo Dragon?', 'Lizard', '[\"Lizard\", \"Snake\", \"Frog\", \"Crocodile\"]'),
 (319, 14, 'Easy', 'Which tree species is known for producing sap used to make syrup?', 'Maple', '[\"Maple\", \"Pine\", \"Oak\", \"Birch\"]'),
 (320, 14, 'Easy', 'Which animal is known to have the most powerful bite?', 'Saltwater Crocodile', '[\"Saltwater Crocodile\", \"Great White Shark\", \"Lion\", \"Wolf\"]'),
-(321, 14, 'Easy', 'What type of animal is a dolphin?', 'Mammal', '[\"Mammal\", \"Fish\", \"Reptile\", \"Bird\"]');
+(321, 14, 'Easy', 'What type of animal is a dolphin?', 'Mammal', '[\"Mammal\", \"Fish\", \"Reptile\", \"Bird\"]'),
+(325, 9, 'Hard', 'In \"The Legend of Zelda: Majora’s Mask\", what is the name of the final boss\'s second phase?', 'Majora\'s Incarnation', '[\"Majora\'s Incarnation\", \"Majora\'s Puppet\", \"Majora\'s Wrathborn\", \"Fierce Deity Majora\"]'),
+(326, 9, 'Medium', 'In Super Metroid, what is the name of the planet where the game takes place?', 'Zebes', '[\"Zebes\", \"Tallon IV\", \"SR388\", \"Aether\"]'),
+(327, 17, 'Medium', 'What type of pasta is shaped like little ears?', 'Orecchiette', '[\"Orecchiette\", \"Fusilli\", \"Farfalle\", \"Rigatoni\"]'),
+(328, 17, 'Easy', 'Which fruit is known for having seeds on the outside? ', 'Strawberry', '[\"Strawberry\", \"Blueberry\", \"Apple\", \"Kiwi\"]'),
+(329, 17, 'Hard', 'What is the name of the protein found in wheat, barley, and rye that people with celiac disease must avoid?', 'Gluten', '[\"Gluten\", \"Lactose\", \"Casein\", \"Albumin\"]'),
+(330, 11, 'Hard', 'Which 1927 silent film is widely regarded as the first full-length science fiction movie?', 'Metropolis', '[\"Metropolis\", \"The Cabinet of Dr. Caligari\", \"Nosferatu\", \"A Trip to the Moon\"]'),
+(331, 4, 'Easy', 'What year was the Declaration of Independence signed? ', '1776', '[\"1776\", \"1786\", \"1796\", \"1766\"]');
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `userID` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `totalScore` int(11) DEFAULT '0',
-  PRIMARY KEY (`userID`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS users;
+CREATE TABLE IF NOT EXISTS users (
+  userID int(11) NOT NULL AUTO_INCREMENT,
+  username varchar(50) NOT NULL,
+  email varchar(100) NOT NULL,
+  password varchar(255) NOT NULL,
+  totalScore int(11) DEFAULT '0',
+  role enum('admin','user') NOT NULL DEFAULT 'user',
+  PRIMARY KEY (userID),
+  UNIQUE KEY email (email)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
-INSERT INTO `users` (`userID`, `username`, `email`, `password`, `totalScore`) VALUES
-(1, 'user1edited', 'user1edited@example.com', '$2b$10$02kwZQ8.1.Qln/htfwJRGuiGq18IUn1skCyc9iY7f4rn2ARnL9lYu', 350),
-(2, 'user2', 'user2@example.com', '25d55ad283aa400af464c76d713c07ad', 180),
-(3, 'user3', 'user3@example.com', '098f6bcd4621d373cade4e832627b4f6', 310),
-(4, 'user4', 'user4@example.com', 'e10adc3949ba59abbe56e057f20f883e', 330),
-(5, 'user5', 'user5@example.com', 'fcea920f7412b5da7be0cf42b8c93759', 300);
+INSERT INTO users (userID, username, email, password, totalScore, role) VALUES
+(1, 'user1edited', 'user1edited@example.com', '$2b$10$02kwZQ8.1.Qln/htfwJRGuiGq18IUn1skCyc9iY7f4rn2ARnL9lYu', 350, 'user'),
+(2, 'user2', 'user2@example.com', '25d55ad283aa400af464c76d713c07ad', 180, 'user'),
+(3, 'user3', 'user3@example.com', '098f6bcd4621d373cade4e832627b4f6', 310, 'user'),
+(4, 'user4', 'user4@example.com', 'e10adc3949ba59abbe56e057f20f883e', 330, 'user'),
+(5, 'user5', 'user5@example.com', 'fcea920f7412b5da7be0cf42b8c93759', 300, 'user'),
+(6, 'ChanceMA', 'spamalot7121@gmail.com', '$2b$10$WgfVAW7jIxAZD9LsdMpfYunsWRAfDwbvHAaNWzE6ATjdCW5DM0z16', 0, 'admin'),
+(7, 'MaxwellsDaemon', 'daemonanimations3d@gmail.com', '$2b$10$LjLwkAjsXT2ec0VCs/HCL.0iwUF1FqIem547FBRuYiYskAWRTY9LC', 0, 'user'),
+(8, 'ChanceAnderson', 'canderson184@my.gcu.edu', '$2b$10$Sjeg.K194tOslYO9RxRYduK4g4XkUdOVYtA/gsCiYfswjVkEH0ha6', 0, 'user');
 
-DROP TABLE IF EXISTS `user_category_scores`;
-CREATE TABLE IF NOT EXISTS `user_category_scores` (
-  `userCategoryScoreID` int(11) NOT NULL AUTO_INCREMENT,
-  `userID` int(11) DEFAULT NULL,
-  `categoryID` int(11) DEFAULT NULL,
-  `score` int(11) DEFAULT '0',
-  PRIMARY KEY (`userCategoryScoreID`),
-  KEY `userID` (`userID`),
-  KEY `user_category_scores_ibfk_2` (`categoryID`)
+DROP TABLE IF EXISTS user_category_scores;
+CREATE TABLE IF NOT EXISTS user_category_scores (
+  userCategoryScoreID int(11) NOT NULL AUTO_INCREMENT,
+  userID int(11) DEFAULT NULL,
+  categoryID int(11) DEFAULT NULL,
+  score int(11) DEFAULT '0',
+  PRIMARY KEY (userCategoryScoreID),
+  KEY userID (userID),
+  KEY user_category_scores_ibfk_2 (categoryID)
 ) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
-INSERT INTO `user_category_scores` (`userCategoryScoreID`, `userID`, `categoryID`, `score`) VALUES
+INSERT INTO user_category_scores (userCategoryScoreID, userID, categoryID, score) VALUES
 (1, 1, 2, 10),
 (2, 1, 3, 10),
 (3, 1, 5, 10),
@@ -496,21 +499,21 @@ INSERT INTO `user_category_scores` (`userCategoryScoreID`, `userID`, `categoryID
 (34, 5, 14, 10),
 (35, 5, 16, 0);
 
-DROP TABLE IF EXISTS `user_responses`;
-CREATE TABLE IF NOT EXISTS `user_responses` (
-  `responseID` int(11) NOT NULL AUTO_INCREMENT,
-  `userID` int(11) DEFAULT NULL,
-  `questionID` int(11) DEFAULT NULL,
-  `userAnswer` varchar(100) NOT NULL,
-  `isCorrect` tinyint(1) NOT NULL,
-  `difficulty` enum('Easy','Medium','Hard') NOT NULL,
-  `scoreEarned` int(11) DEFAULT NULL,
-  PRIMARY KEY (`responseID`),
-  KEY `userID` (`userID`),
-  KEY `questionID` (`questionID`)
+DROP TABLE IF EXISTS user_responses;
+CREATE TABLE IF NOT EXISTS user_responses (
+  responseID int(11) NOT NULL AUTO_INCREMENT,
+  userID int(11) DEFAULT NULL,
+  questionID int(11) DEFAULT NULL,
+  userAnswer varchar(100) NOT NULL,
+  isCorrect tinyint(1) NOT NULL,
+  difficulty enum('Easy','Medium','Hard') NOT NULL,
+  scoreEarned int(11) DEFAULT NULL,
+  PRIMARY KEY (responseID),
+  KEY userID (userID),
+  KEY questionID (questionID)
 ) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8;
 
-INSERT INTO `user_responses` (`responseID`, `userID`, `questionID`, `userAnswer`, `isCorrect`, `difficulty`, `scoreEarned`) VALUES
+INSERT INTO user_responses (responseID, userID, questionID, userAnswer, isCorrect, difficulty, scoreEarned) VALUES
 (1, 1, 12, 'A', 1, 'Easy', 10),
 (2, 2, 32, 'B', 0, 'Medium', 0),
 (3, 3, 45, 'C', 1, 'Hard', 30),
@@ -653,21 +656,17 @@ INSERT INTO `user_responses` (`responseID`, `userID`, `questionID`, `userAnswer`
 (140, 5, 218, 'B', 0, 'Easy', 0);
 
 
-ALTER TABLE `leaderboards`
-  ADD CONSTRAINT `leaderboards_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `leaderboards_ibfk_2` FOREIGN KEY (`categoryID`) REFERENCES `categories` (`categoryID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE leaderboards
+  ADD CONSTRAINT leaderboards_ibfk_1 FOREIGN KEY (userID) REFERENCES `users` (userID) ON DELETE CASCADE,
+  ADD CONSTRAINT leaderboards_ibfk_2 FOREIGN KEY (categoryID) REFERENCES categories (categoryID) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `questions`
-  ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`categoryID`) REFERENCES `categories` (`categoryID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE questions
+  ADD CONSTRAINT questions_ibfk_1 FOREIGN KEY (categoryID) REFERENCES categories (categoryID) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `user_category_scores`
-  ADD CONSTRAINT `user_category_scores_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `user_category_scores_ibfk_2` FOREIGN KEY (`categoryID`) REFERENCES `categories` (`categoryID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE user_category_scores
+  ADD CONSTRAINT user_category_scores_ibfk_1 FOREIGN KEY (userID) REFERENCES `users` (userID) ON DELETE CASCADE,
+  ADD CONSTRAINT user_category_scores_ibfk_2 FOREIGN KEY (categoryID) REFERENCES categories (categoryID) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `user_responses`
-  ADD CONSTRAINT `user_responses_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `user_responses_ibfk_2` FOREIGN KEY (`questionID`) REFERENCES `questions` (`questionID`) ON DELETE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+ALTER TABLE user_responses
+  ADD CONSTRAINT user_responses_ibfk_1 FOREIGN KEY (userID) REFERENCES `users` (userID) ON DELETE CASCADE,
+  ADD CONSTRAINT user_responses_ibfk_2 FOREIGN KEY (questionID) REFERENCES questions (questionID) ON DELETE CASCADE;
